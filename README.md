@@ -21,6 +21,8 @@ python sched.py
 
 调度时间可以在sched.py中修改，默认工作日9点半，具体见代码
 
+建议在编译器里运行，顺便开发点新功能 - -
+
 # 3 写在后面
 
 最初版本运行+调试了一周左右。有bug的话及其他问题，可以在issue里提，也可以pullrequest，大部分的pullrequest都接受，合并到master并保存一个tag
