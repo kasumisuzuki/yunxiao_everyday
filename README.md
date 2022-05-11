@@ -9,7 +9,7 @@
 
 # 2 使用
 
-环境：windows10 python3.7
+环境：windows10 python3.7 火狐浏览器
 ```
 pip install selenium -i https://pypi.tuna.tsinghua.edu.cn/simple
 
