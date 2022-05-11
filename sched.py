@@ -9,6 +9,7 @@ USERNAME = ""
 PASSWORD = ""
 
 if __name__ == '__main__':
+    print('开始运行')
     def job(t):
         nowtime = str(datetime.datetime.now())
         print(t)
