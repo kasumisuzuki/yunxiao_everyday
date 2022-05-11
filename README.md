@@ -23,7 +23,7 @@ python sched.py
 
 # 3 写在后面
 
-最初版本运行+调试了一周左右。有bug的话，可以在issue里提，也可以pullrequest，大部分的pullrequest都接受，合并到master并保存一个tag
+最初版本运行+调试了一周左右。有bug的话及其他问题，可以在issue里提，也可以pullrequest，大部分的pullrequest都接受，合并到master并保存一个tag
 
 不足之处是无法识别节假日
 
