@@ -10,15 +10,15 @@
 # 2 使用
 
 环境：windows10 python3.7
-
+```
 pip install selenium -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 pip install schedule -i https://pypi.tuna.tsinghua.edu.cn/simple
-
+```
 修改sched.py中的用户名密码
-
+```
 python sched.py
-
+```
 调度时间可以在sched.py中修改，默认工作日9点半，具体见代码
 
 建议在编译器里运行，顺便开发点新功能 - -
