@@ -55,6 +55,8 @@ def go(username, password):
     upass.send_keys(password)
     login_btn = driver.find_element_by_xpath('/html/body/div/div/div/div/div[3]/button')
     login_btn.click()
+    my_home = wait_elem_by_xpath(driver, '/html/body/div[1]/div[1]/div[2]/div/div/div[1]/a[1]')
+    my_home.click()
     # 待处理大于0条，则查找处理中的任务，将其进度+5
     un_deal = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]')
     print(un_deal.text)
@@ -92,7 +94,7 @@ def go(username, password):
                             if percent > 100:
                                 percent = 100
                             input_process.send_keys(str(percent))
-                            time.sleep(1)
+                            time.sleep(3)
                             title = driver.find_element_by_xpath('/html/body/div[3]/div[2]/div[1]/div/div[2]/form/div[1]/div/div[1]/div/div/div[1]')
                             print(title.text + ':' + str(int(percent)) + "%")
                             not_succeed = False
@@ -108,6 +110,7 @@ def go(username, password):
                 # 关闭标签页
                 driver.close()
     # 退出浏览器
+    time.sleep(2)
     driver.quit()
 
 
