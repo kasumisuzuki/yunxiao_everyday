@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print(t)
         print(nowtime)
         main.go(USERNAME, PASSWORD)
-    # 执行时间
+    # 执行时间 这边可以设置多个时间点
     for i in ["09:30"]:
         schedule.every().monday.at(i).do(job, i)
         schedule.every().tuesday.at(i).do(job, i)
