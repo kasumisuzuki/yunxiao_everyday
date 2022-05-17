@@ -1,3 +1,4 @@
+import random
 import time
 
 from selenium import webdriver
@@ -43,7 +44,7 @@ def wait_elem_by_selector(driver, selectors, validate_attr_key='', validate_attr
                 time.sleep(0.5)
 
 
-def go(username, password):
+def go(username, password, need_wandering=False):
     # 登录
     driver = webdriver.Firefox(executable_path='geckodriver.exe')
     driver.get("https://devops.linewellcloud.com/")
@@ -109,9 +110,28 @@ def go(username, password):
                             input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
                 # 关闭标签页
                 driver.close()
-    # 退出浏览器
-    time.sleep(2)
-    driver.quit()
+    # 是否瞎逛
+    if need_wandering:
+        wandering(driver)
+    return driver
+
+
+def wandering(driver):
+    job_list = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[2]/ul')
+    li_list = job_list.find_elements_by_tag_name('li')
+    # 打开大约25-40个a标签
+    for i in range(0, random.randint(25, 40)//len(li_list)):
+        for lis in li_list:
+            driver.switch_to.window(driver.window_handles[0])
+            a = lis.find_element_by_xpath('.//a')
+            while len(driver.window_handles) < 2:
+                # 检查a标签是否打开，有时候一次click会打不开
+                a.click()
+                time.sleep(0.5)
+            driver.switch_to.window(driver.window_handles[1])
+            time.sleep(3)
+            # 关闭标签页
+            driver.close()
 
 
 if __name__ == '__main__':
