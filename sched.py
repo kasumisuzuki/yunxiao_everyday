@@ -8,7 +8,7 @@ import main
 USERNAME = ""
 PASSWORD = ""
 # 是否瞎逛 凑30次请求数
-NEED_WANDERING = True
+NEED_WANDERING = False
 
 if __name__ == '__main__':
     print('开始运行')
