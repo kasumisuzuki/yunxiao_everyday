@@ -64,7 +64,8 @@ def go(username, password, need_wandering=False):
     # 找进度的输入框，会遇到好几种selector
     input_process_selectors = ['.J-selected-cvfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-selected-custom-cvfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
-                               '.J-custom-cfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)']
+                               '.J-custom-cfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
+                               '.J-selected-custom-cvfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)']
 
     if un_deal and int(un_deal.text) > 0:
         print('待处理 > 0 ，查找任务')
