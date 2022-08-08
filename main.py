@@ -1,8 +1,10 @@
 import random
 import time
 
+import selenium
 from selenium import webdriver
 from selenium.common.exceptions import ElementNotInteractableException, StaleElementReferenceException
+from selenium.webdriver import Keys
 
 
 def wait_elem_by_id(driver, id):
@@ -56,7 +58,7 @@ def go(username, password, need_wandering=False):
     upass.send_keys(password)
     login_btn = driver.find_element_by_xpath('/html/body/div/div/div/div/div[3]/button')
     login_btn.click()
-    my_home = wait_elem_by_xpath(driver, '/html/body/div[1]/div[1]/div[2]/div/div/div[1]/a[1]')
+    my_home = wait_elem_by_xpath(driver, '/html/body/div[1]/div[1]/div[2]/div/div/div[1]/a[2]')
     my_home.click()
     # 待处理大于0条，则查找处理中的任务，将其进度+5
     un_deal = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]')
@@ -65,8 +67,8 @@ def go(username, password, need_wandering=False):
     input_process_selectors = ['.J-selected-cvfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-selected-custom-cvfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-custom-cfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
-                               '.J-selected-custom-cvfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)']
-
+                               '.J-selected-custom-cvfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)',
+                               '.J-selected-custom-cvfs > div:nth-child(3) > div:nth-child(2) > input:nth-child(1)']
     if un_deal and int(un_deal.text) > 0:
         print('待处理 > 0 ，查找任务')
         job_list = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[2]/ul')
@@ -127,7 +129,11 @@ def wandering(driver):
             a = lis.find_element_by_xpath('.//a')
             while len(driver.window_handles) < 2:
                 # 检查a标签是否打开，有时候一次click会打不开
-                a.click()
+                try:
+                    a.click()
+                except selenium.common.exceptions.ElementClickInterceptedException:
+                    print('ElementClickInterceptedException error')
+                    driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
                 time.sleep(0.5)
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(3)
