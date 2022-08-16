@@ -68,7 +68,8 @@ def go(username, password, need_wandering=False):
                                '.J-selected-custom-cvfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-custom-cfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-selected-custom-cvfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)',
-                               '.J-selected-custom-cvfs > div:nth-child(3) > div:nth-child(2) > input:nth-child(1)']
+                               '.J-selected-custom-cvfs > div:nth-child(3) > div:nth-child(2) > input:nth-child(1)',
+                               '.J-selected-custom-cvfs > div:nth-child(4) > div:nth-child(2) > input:nth-child(1)']
     if un_deal and int(un_deal.text) > 0:
         print('待处理 > 0 ，查找任务')
         job_list = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[2]/ul')
