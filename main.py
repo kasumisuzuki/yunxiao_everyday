@@ -69,7 +69,9 @@ def go(username, password, need_wandering=False):
                                '.J-custom-cfs > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
                                '.J-selected-custom-cvfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)',
                                '.J-selected-custom-cvfs > div:nth-child(3) > div:nth-child(2) > input:nth-child(1)',
-                               '.J-selected-custom-cvfs > div:nth-child(4) > div:nth-child(2) > input:nth-child(1)']
+                               '.J-selected-custom-cvfs > div:nth-child(4) > div:nth-child(2) > input:nth-child(1)',
+                               '.J-selected-custom-cvfs > div:nth-child(3) > div:nth-child(2) > input:nth-child(1)',
+                               '.J-custom-cfs > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)']
     if un_deal and int(un_deal.text) > 0:
         print('待处理 > 0 ，查找任务')
         job_list = wait_elem_by_xpath(driver, '/html/body/div[2]/div/div/div[1]/div[2]/div[3]/div[2]/ul')
@@ -84,14 +86,15 @@ def go(username, password, need_wandering=False):
                     print('a click ,wait new page')
                     time.sleep(0.5)
                 driver.switch_to.window(driver.window_handles[1])
-                input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
-                process_percent = input_process.get_attribute('value')
-                if process_percent != '100':
-                    if process_percent == '':
-                        process_percent = '0'
-                    not_succeed = True
-                    while not_succeed:
-                        try:
+
+                not_succeed = True
+                while not_succeed:
+                    try:
+                        input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
+                        process_percent = input_process.get_attribute('value')
+                        if process_percent != '100':
+                            if process_percent == '':
+                                process_percent = '0'
                             input_process.click()
                             input_process.clear()
                             # 进度+5
@@ -103,15 +106,15 @@ def go(username, password, need_wandering=False):
                             title = driver.find_element_by_xpath('/html/body/div[3]/div[2]/div[1]/div/div[2]/form/div[1]/div/div[1]/div/div/div[1]')
                             print(title.text + ':' + str(int(percent)) + "%")
                             not_succeed = False
-                        except ElementNotInteractableException as e:
-                            # print(e)
-                            time.sleep(1)
-                            input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
+                    except ElementNotInteractableException as e:
+                        # print(e)
+                        time.sleep(1)
+                        input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
 
-                        except StaleElementReferenceException as e:
-                            # print(e)
-                            time.sleep(1)
-                            input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
+                    except StaleElementReferenceException as e:
+                        # print(e)
+                        time.sleep(1)
+                        input_process = wait_elem_by_selector(driver, input_process_selectors, "placeholder", "进度百分比")
                 # 关闭标签页
                 driver.close()
     # 是否瞎逛
